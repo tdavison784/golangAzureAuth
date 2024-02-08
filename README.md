@@ -23,6 +23,16 @@ click on App Registrations.
    5. change ```"accessTokenAcceptedVersion": null``` to ```"accessTokenAcceptedVersion": 2``` This is needed to ensure we are going to interact with the proper OIDC issuer. Save this change.
 6. Next, create a secret. Click on Certificates and Secrets on the left-hand panel. Then click on Client Secrets. Create a new Secret, and store the value somewhere safe.
 7. Now we need to grant API Permissions, The app registration will have one by default ```microsoft.graph.user.read```, we need to add one additional permission: ```microsoft.graph.profile``` this is needed so that we can configure a token claim to contain user UPN for logging and auditing purposes. Save these changes.
-8. Lastly we need to create a new custom Token Configuration. Click on Token Configurations on the left-hand panel.
+8. Now we need to create a new custom Token Configuration. Click on Token Configurations on the left-hand panel.
    9. Select Add optional claim
       10. Token Type, Select Access, and then scroll down until you see upn in the claims list. Select that, and then save.
+11. Lastly we need to expose a API scope. Click on Expose an API located in the left-hand panel
+    12. Select Add a scope
+    13. Give the scope a name. For this example I used ```azureAdAccess```
+    14. Who can Consent?  ```Admin and users```
+    15. Admin Consent Display name ```azureADAccess```
+    16. Admin Consent Description ```azure admin access```
+    17. Click on Add scope.
+    18. Copy the Application ID URI, and add it into your scopes slice on line 25 in the main.go file
+
+
